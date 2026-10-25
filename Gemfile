@@ -68,6 +68,6 @@ gem "bcrypt", "~> 3.1"
 
 gem "devise", "~> 5.0"
 
-gem "json", "= 2.10.1"
+gem "json", "3.1.0"
 
 gem "dotenv-rails", "~> 3.2"
