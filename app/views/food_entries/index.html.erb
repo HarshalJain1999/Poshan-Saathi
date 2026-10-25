@@ -1,0 +1,136 @@
+
+<style>
+  .ps-page { max-width: 1050px; margin: 30px auto; padding: 20px; color: #25352d; font-family: Arial, sans-serif; }
+  .ps-banner { background: #e7f4e9; padding: 28px; border-radius: 16px; margin-bottom: 24px; }
+  .ps-banner h1 { margin: 0 0 8px; color: #246b45; }
+  .ps-card { background: white; border: 1px solid #e1e8e2; border-radius: 14px; padding: 24px; margin-bottom: 24px; }
+  .ps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; }
+  .ps-field label { display: block; font-weight: 600; margin-bottom: 7px; }
+  .ps-field input, .ps-field select { width: 100%; box-sizing: border-box; padding: 11px; border: 1px solid #ccd8ce; border-radius: 8px; background: white; }
+  .ps-button { display: inline-block; border: 0; border-radius: 8px; padding: 12px 18px; background: #28794c; color: white; cursor: pointer; text-decoration: none; font-weight: 600; }
+  .ps-secondary { background: #edf3ee; color: #246b45; }
+  .ps-table-wrap { overflow-x: auto; }
+  .ps-table { width: 100%; border-collapse: collapse; }
+  .ps-table th, .ps-table td { padding: 13px 10px; border-bottom: 1px solid #e5ebe6; text-align: left; }
+  .ps-table th { background: #f4f8f4; }
+  .ps-error { color: #a12626; margin-bottom: 14px; }
+  .ps-actions { display: flex; gap: 8px; align-items: center; }
+  .ps-actions form { margin: 0; }
+  .ps-muted { color: #637168; }
+</style>
+
+<div class="ps-page">
+  <div class="ps-banner">
+    <p class="ps-muted">POSHAN SAATHI · YOUR DAILY FOOD JOURNAL</p>
+    <h1>My Food Diary</h1>
+    <p>Chhoti-chhoti food choices ko track karo aur apni daily food variety samjho.</p>
+    <%= link_to "Back to Dashboard", dashboard_path, class: "ps-button ps-secondary" %>
+  </div>
+
+  <div class="ps-card">
+    <h2>Add Today's Food</h2>
+    <p class="ps-muted">Apne meal ki details enter karo.</p>
+
+    <% if @food_entry.errors.any? %>
+      <div class="ps-error">
+        <strong>Please correct these errors:</strong>
+        <ul>
+          <% @food_entry.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with model: @food_entry, local: true do |f| %>
+      <div class="ps-grid">
+        <div class="ps-field">
+          <%= f.label :eaten_on, "Date" %>
+          <%= f.date_field :eaten_on, required: true %>
+        </div>
+
+        <div class="ps-field">
+          <%= f.label :meal_type, "Meal" %>
+          <%= f.select :meal_type,
+              FoodEntry.meal_types.keys.map { |meal| [meal.titleize, meal] },
+              { prompt: "Select meal" }, required: true %>
+        </div>
+
+        <div class="ps-field">
+          <%= f.label :food_name, "Food name" %>
+          <%= f.text_field :food_name, placeholder: "e.g. Dal, Roti, Banana", required: true %>
+        </div>
+
+        <div class="ps-field">
+          <%= f.label :food_group, "Food group" %>
+          <%= f.select :food_group,
+              [
+                ["Grains", "grains"],
+                ["Pulses and legumes", "pulses"],
+                ["Dairy", "dairy"],
+                ["Fruits", "fruits"],
+                ["Vegetables", "vegetables"],
+                ["Protein-rich foods", "protein"],
+                ["Other", "other"]
+              ],
+              { prompt: "Select food group" }, required: true %>
+        </div>
+
+        <div class="ps-field">
+          <%= f.label :quantity, "Quantity (optional)" %>
+          <%= f.text_field :quantity, placeholder: "e.g. 2 rotis, 1 bowl" %>
+        </div>
+      </div>
+
+      <p style="margin-top: 22px;">
+        <%= f.submit "Save Food Entry", class: "ps-button" %>
+      </p>
+    <% end %>
+  </div>
+
+  <div class="ps-card">
+    <h2>My Food Records</h2>
+    <p class="ps-muted">Your saved food entries are listed below.</p>
+
+    <% if @food_entries.any? %>
+      <div class="ps-table-wrap">
+        <table class="ps-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Meal</th>
+              <th>Food</th>
+              <th>Food group</th>
+              <th>Quantity</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @food_entries.each do |entry| %>
+              <tr>
+                <td><%= entry.eaten_on&.strftime("%d %b %Y") %></td>
+                <td><%= entry.meal_type.titleize %></td>
+                <td><%= entry.food_name %></td>
+                <td><%= entry.food_group.titleize %></td>
+                <td><%= entry.quantity.presence || "—" %></td>
+                <td>
+                  <div class="ps-actions">
+                    <%= link_to "Edit", edit_food_entry_path(entry), class: "ps-button ps-secondary" %>
+                    <%= button_to "Delete", food_entry_path(entry),
+                        method: :delete,
+                        class: "ps-button",
+                        form: { data: { turbo_confirm: "Delete this food entry?" } } %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p>No food entries yet. Add your first meal above!</p>
+    <% end %>
+  <p>Track your daily food, explore affordable foods, and monitor your progress.</p>
+  </div>
+
+</div>

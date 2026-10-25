@@ -1,0 +1,19 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+
+development:
+  <<: *default
+  database: poshan_saathi_development
+  username: poshan_saathi
+  password: <%= ENV.fetch("POSHAN_SAATHI_DATABASE_PASSWORD", "") %>
+
+test:
+  <<: *default
+  database: poshan_saathi_test
+  username: poshan_saathi
+  password: <%= ENV.fetch("POSHAN_SAATHI_DATABASE_PASSWORD", "") %>
+

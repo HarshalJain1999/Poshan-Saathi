@@ -1,0 +1,51 @@
+
+<div style="max-width: 750px; margin: 40px auto; padding: 24px; font-family: Arial, sans-serif;">
+  <h1>Edit Food Entry</h1>
+  <p>Apni food entry ki details update karo.</p>
+
+  <% if @food_entry.errors.any? %>
+    <ul style="color: #a12626;">
+      <% @food_entry.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with model: @food_entry, local: true do |f| %>
+    <p>
+      <%= f.label :eaten_on, "Date" %><br>
+      <%= f.date_field :eaten_on, required: true %>
+    </p>
+
+    <p>
+      <%= f.label :meal_type, "Meal" %><br>
+      <%= f.select :meal_type,
+          FoodEntry.meal_types.keys.map { |meal| [meal.titleize, meal] },
+          { prompt: "Select meal" }, required: true %>
+    </p>
+
+    <p>
+      <%= f.label :food_name, "Food name" %><br>
+      <%= f.text_field :food_name, required: true %>
+    </p>
+
+    <p>
+      <%= f.label :food_group, "Food group" %><br>
+      <%= f.select :food_group,
+          [["Grains", "grains"], ["Pulses and legumes", "pulses"],
+           ["Dairy", "dairy"], ["Fruits", "fruits"],
+           ["Vegetables", "vegetables"], ["Protein-rich foods", "protein"],
+           ["Other", "other"]],
+          { prompt: "Select food group" }, required: true %>
+    </p>
+
+    <p>
+      <%= f.label :quantity, "Quantity" %><br>
+      <%= f.text_field :quantity %>
+    </p>
+
+    <%= f.submit "Update Entry" %>
+  <% end %>
+
+  <p><%= link_to "Back to Food Diary", food_entries_path %></p>
+</div>

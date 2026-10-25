@@ -1,0 +1,810 @@
+<style>
+  .ps-dashboard {
+    --ps-green: #26734d;
+    --ps-dark: #173d2b;
+    --ps-mint: #eaf5ed;
+    --ps-muted: #718078;
+    --ps-border: #e4ebe5;
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 30px 22px 48px;
+    color: #26382d;
+    font-family: Inter, -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", Arial, sans-serif;
+  }
+
+  .ps-hero-top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 12px;
+  }
+
+  .ps-logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    color: #a33a3a !important;
+    background: #fff;
+    border: 1px solid #f0dada;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: background .2s ease;
+  }
+
+  .ps-logout-btn:hover {
+    background: #fff1f1;
+  }
+
+  .ps-dashboard * {
+    box-sizing: border-box;
+  }
+
+  .ps-dashboard a {
+    text-decoration: none;
+  }
+
+  .ps-hero {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 38px;
+    margin-bottom: 28px;
+    border: 1px solid #d9eadd;
+    border-radius: 26px;
+    background: linear-gradient(120deg, #edf7ef 0%,
+                                #f7fbf5 65%, #e3f2e7 100%);
+  }
+
+  .ps-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+  }
+
+  .ps-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 15px;
+    color: var(--ps-green);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+  }
+
+  .ps-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4c9c67;
+  }
+
+  .ps-hero h1 {
+    margin: 0 0 14px;
+    color: var(--ps-dark);
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 750;
+    letter-spacing: -1.4px;
+    line-height: 1.15;
+  }
+
+  .ps-hero h1 span {
+    color: var(--ps-green);
+  }
+
+  .ps-hero-description {
+    max-width: 590px;
+    margin: 0;
+    color: #5c6d61;
+    font-size: 15px;
+    line-height: 1.85;
+  }
+
+  .ps-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+  }
+
+  .ps-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 9px;
+    min-height: 46px;
+    padding: 12px 19px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: transform .2s ease, background .2s ease;
+  }
+
+  .ps-btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .ps-btn-primary {
+    color: #fff !important;
+    background: var(--ps-green);
+    box-shadow: 0 5px 14px #26734d20;
+  }
+
+  .ps-btn-primary:hover {
+    background: #1b5a3a;
+  }
+
+  .ps-btn-secondary {
+    color: var(--ps-green) !important;
+    background: #fff;
+    border-color: #dce9de;
+  }
+
+  .ps-hero-art {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #dcefe0;
+    box-shadow: 0 0 0 15px #dcefe04d,
+                0 0 0 30px #dcefe026;
+    font-size: 76px;
+  }
+
+  .ps-notice,
+  .ps-alert {
+    padding: 14px 17px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .ps-notice {
+    color: #205e3d;
+    background: #e8f5eb;
+    border: 1px solid #d5e9d9;
+  }
+
+  .ps-alert {
+    color: #9d2929;
+    background: #fff1f0;
+    border: 1px solid #f2d5d3;
+  }
+
+  .ps-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 32px 0 17px;
+  }
+
+  .ps-section-heading h2 {
+    margin: 0;
+    color: #23382a;
+    font-size: 21px;
+    font-weight: 750;
+    letter-spacing: -.45px;
+  }
+
+  .ps-section-heading p {
+    margin: 6px 0 0;
+    color: var(--ps-muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .ps-section-tag {
+    padding: 7px 11px;
+    border-radius: 9px;
+    color: var(--ps-green);
+    background: var(--ps-mint);
+    font-size: 11px;
+    font-weight: 750;
+    white-space: nowrap;
+  }
+
+  .ps-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+  }
+
+  .ps-stat {
+    min-width: 0;
+    padding: 23px;
+    background: #fff;
+    border: 1px solid var(--ps-border);
+    border-radius: 19px;
+    box-shadow: 0 3px 14px #193a2410;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .ps-stat:hover,
+  .ps-feature:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px #193a2410;
+  }
+
+  .ps-stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ps-stat-label {
+    color: #65756a;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .ps-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    font-size: 21px;
+  }
+
+  .ps-icon-green { background: #e5f4e8; }
+  .ps-icon-orange { background: #fff0df; }
+  .ps-icon-blue { background: #e7f0ff; }
+
+  .ps-stat-number {
+    margin: 18px 0 5px;
+    color: var(--ps-dark);
+    font-size: 35px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+
+  .ps-stat-note {
+    color: #829087;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .ps-features {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+  }
+
+  .ps-feature {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 0;
+    padding: 25px;
+    background: #fff;
+    border: 1px solid var(--ps-border);
+    border-radius: 19px;
+    box-shadow: 0 3px 14px #193a2408;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+
+  .ps-feature-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 17px;
+    border-radius: 16px;
+    font-size: 26px;
+  }
+
+  .ps-feature h3 {
+    margin: 0 0 9px;
+    color: #263d2e;
+    font-size: 17px;
+    font-weight: 750;
+  }
+
+  .ps-feature p {
+    flex-grow: 1;
+    margin: 0 0 18px;
+    color: #748077;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  .ps-feature .ps-btn {
+    min-height: 40px;
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+
+  .ps-records {
+    margin-top: 32px;
+    padding: 26px;
+    background: #fff;
+    border: 1px solid var(--ps-border);
+    border-radius: 21px;
+    box-shadow: 0 3px 14px #193a2408;
+  }
+
+  .ps-records-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 17px;
+  }
+
+  .ps-records-header h2 {
+    margin: 0;
+    color: #23382a;
+    font-size: 20px;
+    font-weight: 750;
+  }
+
+  .ps-records-header p {
+    margin: 7px 0 0;
+    color: var(--ps-muted);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .ps-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e8eee9;
+    border-radius: 13px;
+  }
+
+  .ps-table {
+    width: 100%;
+    min-width: 550px;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .ps-table th,
+  .ps-table td {
+    padding: 15px 17px;
+    text-align: left;
+    border-bottom: 1px solid #edf1ed;
+  }
+
+  .ps-table th {
+    color: #5e7063;
+    background: #f5f8f5;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+  }
+
+  .ps-table td {
+    color: #435348;
+  }
+
+  .ps-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .ps-table tbody tr:hover {
+    background: #f8fbf8;
+  }
+
+  .ps-meal-badge {
+    display: inline-block;
+    padding: 6px 9px;
+    color: #286746;
+    background: #eaf5ed;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 750;
+  }
+
+  .ps-food-name {
+    color: #26382d;
+    font-weight: 700;
+  }
+
+  .ps-empty {
+    padding: 35px 20px;
+    text-align: center;
+    border: 1px dashed #d6e4d8;
+    border-radius: 15px;
+    background: #fafcf9;
+  }
+
+  .ps-empty-icon {
+    margin-bottom: 12px;
+    font-size: 38px;
+  }
+
+  .ps-empty h3 {
+    margin: 0 0 8px;
+    color: #2a4935;
+    font-size: 17px;
+  }
+
+  .ps-empty p {
+    margin: 0 0 18px;
+    color: var(--ps-muted);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+
+  .ps-footer {
+    margin-top: 25px;
+    color: #849087;
+    font-size: 12px;
+    line-height: 1.7;
+    text-align: center;
+  }
+
+  @media (max-width: 760px) {
+    .ps-dashboard {
+      padding: 18px 14px 32px;
+    }
+
+    .ps-hero {
+      padding: 27px 22px;
+      border-radius: 21px;
+    }
+
+    .ps-hero-art {
+      width: 95px;
+      height: 95px;
+      font-size: 48px;
+    }
+
+    .ps-stats {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .ps-stat {
+      padding: 19px;
+    }
+
+    .ps-stat-number {
+      margin-top: 13px;
+      font-size: 31px;
+    }
+
+    .ps-features {
+      grid-template-columns: 1fr;
+      gap: 13px;
+    }
+
+    .ps-feature {
+      padding: 21px;
+    }
+
+    .ps-section-heading {
+      align-items: flex-start;
+    }
+
+    .ps-records {
+      padding: 19px 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ps-hero {
+      padding: 24px 19px;
+    }
+
+    .ps-hero-art {
+      display: none;
+    }
+
+    .ps-hero h1 {
+      font-size: 31px;
+      letter-spacing: -.8px;
+    }
+
+    .ps-hero-description {
+      font-size: 14px;
+    }
+
+    .ps-hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .ps-section-heading h2 {
+      font-size: 19px;
+    }
+
+    .ps-section-tag {
+      font-size: 10px;
+    }
+
+    .ps-records-header {
+      flex-direction: column;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ps-stat,
+    .ps-feature,
+    .ps-btn {
+      transition: none;
+    }
+  }
+</style>
+
+<div class="ps-dashboard">
+
+  <% if notice.present? %>
+    <div class="ps-notice" role="status">
+      <%= notice %>
+    </div>
+  <% end %>
+
+  <% if alert.present? %>
+    <div class="ps-alert" role="alert">
+      <%= alert %>
+    </div>
+  <% end %>
+
+  <!-- Welcome section -->
+  <section class="ps-hero">
+    <div class="ps-hero-content">
+      <p class="ps-eyebrow">
+        <span class="ps-dot"></span>
+        POSHAN SAATHI · YOUR WELLNESS SPACE
+      </p>
+
+      <h1>
+        Hello, <span><%= current_user.name.presence || "Student" %>!</span>
+      </h1>
+
+      <p class="ps-hero-description">
+        Small food choices can make a meaningful difference.
+        Record your meals, discover food diversity and explore
+        practical nutrition ideas that fit your everyday life and budget.
+      </p>
+
+      <div class="ps-hero-actions">
+        <%= link_to food_entries_path, class: "ps-btn ps-btn-primary" do %>
+          + Add Today's Food
+        <% end %>
+
+        <%= link_to food_suggestions_path,
+            class: "ps-btn ps-btn-secondary" do %>
+          Explore Nutrition Ideas →
+        <% end %>
+      </div>
+    </div>
+
+    <div class="ps-hero-art" aria-hidden="true">🥗</div>
+  </section>
+
+  <!-- Daily overview -->
+  <div class="ps-section-heading">
+    <div>
+      <h2>Your Daily Overview</h2>
+      <p>A simple snapshot of your recorded food habits.</p>
+    </div>
+
+    <span class="ps-section-tag">TODAY</span>
+  </div>
+
+  <section class="ps-stats">
+
+    <div class="ps-stat">
+      <div class="ps-stat-top">
+        <span class="ps-stat-label">Today's Food Entries</span>
+        <div class="ps-stat-icon ps-icon-green">🍱</div>
+      </div>
+
+      <div class="ps-stat-number">
+        <%= @today_entries.count %>
+      </div>
+
+      <div class="ps-stat-note">
+        Meals and food items recorded today
+      </div>
+    </div>
+
+    <div class="ps-stat">
+      <div class="ps-stat-top">
+        <span class="ps-stat-label">Food Groups Today</span>
+        <div class="ps-stat-icon ps-icon-orange">🥦</div>
+      </div>
+
+      <div class="ps-stat-number">
+        <%= @food_groups_count %>
+      </div>
+
+      <div class="ps-stat-note">
+        Different food groups represented in today's records
+      </div>
+    </div>
+
+    <div class="ps-stat">
+      <div class="ps-stat-top">
+        <span class="ps-stat-label">Total Food Records</span>
+        <div class="ps-stat-icon ps-icon-blue">📊</div>
+      </div>
+
+      <div class="ps-stat-number">
+        <%= @total_entries %>
+      </div>
+
+      <div class="ps-stat-note">
+        Food records saved in your diary
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Features -->
+  <div class="ps-section-heading">
+    <div>
+      <h2>Explore Poshan Saathi</h2>
+      <p>Your everyday companion for food awareness and informed choices.</p>
+    </div>
+  </div>
+
+  <section class="ps-features">
+
+    <article class="ps-feature">
+      <div class="ps-feature-icon ps-icon-green">🍱</div>
+
+      <h3>My Food Diary</h3>
+
+      <p>
+        Record breakfast, lunch, snacks and dinner.
+        Keep your daily food history organized in one place.
+      </p>
+
+      <%= link_to "Open Food Diary →", food_entries_path,
+          class: "ps-btn ps-btn-secondary" %>
+    </article>
+
+    <article class="ps-feature">
+      <div class="ps-feature-icon ps-icon-orange">🥗</div>
+
+      <h3>Nutrition Suggestions</h3>
+
+      <p>
+        Explore affordable meal ideas, local foods and simple
+        ways to add variety to your everyday meals.
+      </p>
+
+      <%= link_to "Explore Suggestions →", food_suggestions_path,
+          class: "ps-btn ps-btn-secondary" %>
+    </article>
+
+    <article class="ps-feature">
+      <div class="ps-feature-icon ps-icon-blue">🌈</div>
+
+      <h3>Food Diversity</h3>
+
+      <p>
+        Review the different food groups in your records
+        and build awareness of variety in your meals.
+      </p>
+
+      <%= link_to "View Food Records →", food_entries_path,
+          class: "ps-btn ps-btn-secondary" %>
+    </article>
+
+    <article class="ps-feature">
+      <div class="ps-feature-icon ps-icon-green">📈</div>
+
+      <h3>My Progress</h3>
+
+      <p>
+        Record your meals regularly and revisit your food history
+        to observe your habits over time.
+      </p>
+
+      <%= link_to "Track My Food →", food_entries_path,
+          class: "ps-btn ps-btn-secondary" %>
+    </article>
+
+  </section>
+
+  <!-- Today's records -->
+  <section class="ps-records">
+    <div class="ps-records-header">
+      <div>
+        <h2>Today's Food Records</h2>
+        <p>Review the meals and food items you have logged today.</p>
+      </div>
+
+      <%= link_to "+ Add Food", food_entries_path,
+          class: "ps-btn ps-btn-primary" %>
+    </div>
+
+    <% if @today_entries.any? %>
+
+      <div class="ps-table-wrap">
+        <table class="ps-table">
+          <thead>
+            <tr>
+              <th>Meal</th>
+              <th>Food Item</th>
+              <th>Food Group</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @today_entries.each do |entry| %>
+              <tr>
+                <td>
+                  <span class="ps-meal-badge">
+                    <%= entry.meal_type.to_s.titleize %>
+                  </span>
+                </td>
+
+                <td class="ps-food-name">
+                  <%= entry.food_name %>
+                </td>
+
+                <td>
+                  <%= entry.food_group.to_s.titleize %>
+                </td>
+
+                <td>
+                  <%= entry.quantity.presence || "—" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+    <% else %>
+
+      <div class="ps-empty">
+        <div class="ps-empty-icon" aria-hidden="true">🥣</div>
+
+        <h3>Your food diary starts here</h3>
+
+        <p>
+          You haven't recorded any food today.
+          Add your first meal to begin building your food history.
+        </p>
+
+        <%= link_to "Record Your First Meal →", food_entries_path,
+            class: "ps-btn ps-btn-primary" %>
+      </div>
+
+    <% end %>
+  </section>
+
+  <div class="ps-footer">
+    Poshan Saathi · Better food awareness, one meal at a time.
+    <br>
+    Make informed food choices that work for your everyday life.
+  </div>
+
+  <div class="ps-hero-top">
+    <%= button_to destroy_user_session_path,
+        method: :delete,
+        class: "ps-logout-btn",
+        form: { data: { turbo_confirm: "Are you sure you want to logout?" } } do %>
+      <span aria-hidden="true">↪</span>
+      Logout
+    <% end %>
+  </div>
+
+</div>

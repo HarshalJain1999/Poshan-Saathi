@@ -1,0 +1,363 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard
+ * cascading order, meaning styles declared later in the document or manifest will override earlier ones,
+ * depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+/* ===== POSHAN SAATHI AUTH PAGES ===== */
+
+.ps-auth-page {
+  --auth-green: #28764d;
+  --auth-dark: #183d2b;
+  --auth-muted: #748178;
+  min-height: 100vh;
+  padding: 32px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f4f8f3;
+  color: #26382d;
+  font-family: Inter, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Arial, sans-serif;
+}
+
+.ps-auth-page *,
+.ps-auth-page *::before,
+.ps-auth-page *::after {
+  box-sizing: border-box;
+}
+
+.ps-auth-shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  max-width: 1000px;
+  min-height: 610px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #e4ebe4;
+  border-radius: 25px;
+  box-shadow: 0 20px 65px rgba(31, 65, 41, 0.09);
+}
+
+.ps-auth-aside {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  padding: 38px;
+  color: #fff;
+  background: linear-gradient(145deg, #1d5839, #2d8053);
+}
+
+.ps-auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.4px;
+}
+
+.ps-auth-brand-icon {
+  display: flex;
+  width: 43px;
+  height: 43px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .15);
+  font-size: 24px;
+}
+
+.ps-auth-aside-content {
+  position: relative;
+  z-index: 1;
+  margin: 45px 0;
+}
+
+.ps-auth-kicker {
+  margin: 0 0 16px;
+  color: #c9efd3;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.ps-auth-aside h1 {
+  margin: 0 0 18px;
+  color: #fff;
+  font-size: clamp(30px, 3.5vw, 43px);
+  line-height: 1.16;
+  letter-spacing: -1.3px;
+}
+
+.ps-auth-aside-content > p {
+  margin: 0;
+  max-width: 360px;
+  color: #e0f0e4;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.ps-auth-illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 125px;
+  margin-top: 25px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .08);
+  font-size: 65px;
+}
+
+.ps-auth-aside-footer {
+  margin: 0;
+  color: #d2e8d7;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.ps-auth-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 42px;
+}
+
+.ps-auth-form-wrap {
+  width: 100%;
+  max-width: 370px;
+}
+
+.ps-auth-mobile-brand {
+  display: none;
+}
+
+.ps-auth-heading {
+  margin: 0 0 9px;
+  color: var(--auth-dark);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -.9px;
+}
+
+.ps-auth-subtitle {
+  margin: 0 0 28px;
+  color: var(--auth-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.ps-auth-flash {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ps-auth-flash-notice {
+  color: #205e3d;
+  background: #e9f6ec;
+  border: 1px solid #d4e9d8;
+}
+
+.ps-auth-flash-alert {
+  color: #9d2929;
+  background: #fff0ef;
+  border: 1px solid #f0d5d3;
+}
+
+.ps-auth-errors {
+  margin-bottom: 18px;
+  padding: 13px 15px;
+  color: #9d2929;
+  background: #fff3f2;
+  border: 1px solid #f1d9d7;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.ps-auth-errors ul {
+  margin: 7px 0 0;
+  padding-left: 18px;
+}
+
+.ps-auth-field {
+  margin-bottom: 18px;
+}
+
+.ps-auth-field label {
+  display: block;
+  margin-bottom: 8px;
+  color: #33463a;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.ps-auth-input-wrap {
+  position: relative;
+}
+
+.ps-auth-input,
+.ps-auth-input-wrap input {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 13px 14px;
+  color: #26382d;
+  background: #fff;
+  border: 1px solid #dce5dd;
+  border-radius: 11px;
+  outline: none;
+  font-family: inherit;
+  font-size: 13px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.ps-auth-input:focus,
+.ps-auth-input-wrap input:focus {
+  border-color: #4b9869;
+  box-shadow: 0 0 0 3px rgba(40, 118, 77, .10);
+}
+
+.ps-auth-input::placeholder {
+  color: #a0aaa2;
+}
+
+.ps-auth-password-input {
+  padding-right: 72px !important;
+}
+
+.ps-auth-show-password {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  padding: 5px;
+  color: var(--auth-green);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.ps-auth-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 2px 0 23px;
+  font-size: 12px;
+}
+
+.ps-auth-remember {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #637168;
+}
+
+.ps-auth-remember input {
+  accent-color: var(--auth-green);
+}
+
+.ps-auth-link {
+  color: var(--auth-green);
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.ps-auth-link:hover {
+  text-decoration: underline;
+}
+
+.ps-auth-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 49px;
+  padding: 13px 18px;
+  color: #fff;
+  background: var(--auth-green);
+  border: 0;
+  border-radius: 11px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  box-shadow: 0 6px 15px rgba(40, 118, 77, .17);
+  transition: background .2s, transform .2s;
+}
+
+.ps-auth-submit:hover {
+  background: #205e3d;
+  transform: translateY(-1px);
+}
+
+.ps-auth-switch {
+  margin: 23px 0 0;
+  color: #7a867d;
+  font-size: 12px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.ps-auth-bottom-note {
+  margin-top: 24px;
+  color: #9aa49c;
+  font-size: 11px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .ps-auth-page {
+    padding: 18px 12px;
+  }
+
+  .ps-auth-shell {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    min-height: auto;
+    border-radius: 21px;
+  }
+
+  .ps-auth-aside {
+    display: none;
+  }
+
+  .ps-auth-main {
+    padding: 32px 25px;
+  }
+
+  .ps-auth-mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    color: #245c3b;
+    font-size: 16px;
+    font-weight: 800;
+  }
+
+  .ps-auth-mobile-brand span:first-child {
+    font-size: 27px;
+  }
+
+  .ps-auth-heading {
+    font-size: 27px;
+  }
+}
