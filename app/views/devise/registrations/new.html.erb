@@ -1,0 +1,119 @@
+<div class="ps-auth-page">
+  <div class="ps-auth-shell">
+
+    <aside class="ps-auth-aside">
+      <div class="ps-auth-brand">
+        <div class="ps-auth-brand-icon">🌿</div>
+        <span>Poshan Saathi</span>
+      </div>
+
+      <div class="ps-auth-aside-content">
+        <p class="ps-auth-kicker">START YOUR WELLNESS JOURNEY</p>
+        <h1>Build better habits.<br>One day at a time.</h1>
+        <p>
+          Create your account to understand your food choices,
+          discover affordable meal ideas, and build a more varied diet.
+        </p>
+        <div class="ps-auth-illustration" aria-hidden="true">🥗 🍎 🥦</div>
+      </div>
+
+      <p class="ps-auth-aside-footer">
+        Small food choices can make a difference.<br>
+        Your journey starts here.
+      </p>
+    </aside>
+
+    <main class="ps-auth-main">
+      <div class="ps-auth-form-wrap">
+
+        <div class="ps-auth-mobile-brand">
+          <span>🌿</span>
+          <span>Poshan Saathi</span>
+        </div>
+
+        <h2 class="ps-auth-heading">Create your account</h2>
+        <p class="ps-auth-subtitle">
+          Join Poshan Saathi and take your first step towards better food awareness.
+        </p>
+
+        <% if notice.present? %>
+          <div class="ps-auth-flash ps-auth-flash-notice"><%= notice %></div>
+        <% end %>
+
+        <% if alert.present? %>
+          <div class="ps-auth-flash ps-auth-flash-alert"><%= alert %></div>
+        <% end %>
+
+        <% if resource.errors.any? %>
+          <div class="ps-auth-errors">
+            <strong>Please check the following:</strong>
+            <ul>
+              <% resource.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <%= form_for(resource, as: resource_name,
+          url: registration_path(resource_name)) do |f| %>
+
+          <div class="ps-auth-field">
+            <%= f.label :name, "Full name" %>
+            <%= f.text_field :name,
+              autofocus: true,
+              autocomplete: "name",
+              placeholder: "Enter your full name",
+              required: true,
+              class: "ps-auth-input" %>
+          </div>
+
+          <div class="ps-auth-field">
+            <%= f.label :email, "Email address" %>
+            <%= f.email_field :email,
+              autocomplete: "email",
+              placeholder: "you@example.com",
+              required: true,
+              class: "ps-auth-input" %>
+          </div>
+
+          <div class="ps-auth-field">
+            <%= f.label :password, "Password" %>
+            <% if @minimum_password_length %>
+              <span class="ps-auth-hint">
+                (Minimum <%= @minimum_password_length %> characters)
+              </span>
+            <% end %>
+            <%= f.password_field :password,
+              autocomplete: "new-password",
+              placeholder: "Create a password",
+              required: true,
+              class: "ps-auth-input" %>
+          </div>
+
+          <div class="ps-auth-field">
+            <%= f.label :password_confirmation, "Confirm password" %>
+            <%= f.password_field :password_confirmation,
+              autocomplete: "new-password",
+              placeholder: "Enter your password again",
+              required: true,
+              class: "ps-auth-input" %>
+          </div>
+
+          <%= f.submit "Create Account →", class: "ps-auth-submit" %>
+        <% end %>
+
+        <p class="ps-auth-switch">
+          Already have an account?
+          <%= link_to "Sign in", new_user_session_path, class: "ps-auth-link" %>
+        </p>
+
+        <p class="ps-auth-bottom-note">
+          Your personal nutrition journey begins with one small step.
+        </p>
+
+      </div>
+    </main>
+
+  </div>
+</div>

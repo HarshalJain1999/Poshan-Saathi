@@ -1,0 +1,111 @@
+<div class="ps-auth-page">
+  <div class="ps-auth-shell">
+
+    <aside class="ps-auth-aside">
+      <div class="ps-auth-brand">
+        <div class="ps-auth-brand-icon">🌿</div>
+        <span>Poshan Saathi</span>
+      </div>
+
+      <div class="ps-auth-aside-content">
+        <p class="ps-auth-kicker">YOUR WELLNESS JOURNEY</p>
+
+        <h1>Better habits.<br>Brighter future.</h1>
+
+        <p>
+          Understand your food choices, discover affordable meal ideas,
+          and take small steps towards a healthier lifestyle.
+        </p>
+
+        <div class="ps-auth-illustration" aria-hidden="true">
+          🥗 🍎 🥦
+        </div>
+      </div>
+
+      <p class="ps-auth-aside-footer">
+        Small food choices can make a difference.<br>
+        Start your journey with Poshan Saathi.
+      </p>
+    </aside>
+
+    <main class="ps-auth-main">
+      <div class="ps-auth-form-wrap">
+
+        <div class="ps-auth-mobile-brand">
+          <span>🌿</span>
+          <span>Poshan Saathi</span>
+        </div>
+
+        <h2 class="ps-auth-heading">Welcome back!</h2>
+
+        <p class="ps-auth-subtitle">
+          Sign in to continue your nutrition journey.
+        </p>
+
+        <% if notice.present? %>
+          <div class="ps-auth-flash ps-auth-flash-notice">
+            <%= notice %>
+          </div>
+        <% end %>
+
+        <% if alert.present? %>
+          <div class="ps-auth-flash ps-auth-flash-alert">
+            <%= alert %>
+          </div>
+        <% end %>
+
+        <%= form_for(resource, as: resource_name,
+          url: session_path(resource_name)) do |f| %>
+
+          <div class="ps-auth-field">
+            <%= f.label :email, "Email address" %>
+            <%= f.email_field :email,
+              autofocus: true,
+              autocomplete: "email",
+              placeholder: "you@example.com",
+              required: true,
+              class: "ps-auth-input" %>
+          </div>
+
+          <div class="ps-auth-field">
+            <%= f.label :password, "Password" %>
+            <%= f.password_field :password,
+              autocomplete: "current-password",
+              placeholder: "Enter your password",
+              required: true,
+              class: "ps-auth-input" %>
+          </div>
+
+          <div class="ps-auth-options">
+            <% if devise_mapping.rememberable? %>
+              <label class="ps-auth-remember">
+                <%= f.check_box :remember_me %>
+                Remember me
+              </label>
+            <% end %>
+
+            <% if devise_mapping.recoverable? %>
+              <%= link_to "Forgot password?",
+                new_password_path(resource_name),
+                class: "ps-auth-link" %>
+            <% end %>
+          </div>
+
+          <%= f.submit "Sign In →", class: "ps-auth-submit" %>
+        <% end %>
+
+        <p class="ps-auth-switch">
+          <p class="ps-auth-switch">
+          Don't have an account?
+          <a href="/users/sign_up" class="ps-auth-link">Create account</a>
+        </p>
+
+        <p class="ps-auth-bottom-note">
+          Your journey towards better food awareness starts here.
+        </p>
+
+      </div>
+    </main>
+
+  </div>
+</div>
